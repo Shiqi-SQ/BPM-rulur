@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鼓击测速器 - BPM测量工具</title>
+    <meta name="description" content="鼓击测速器是一款专业的BPM(每分钟节拍数)测量工具，帮助音乐人、DJ和鼓手精确测量和控制音乐节奏。">
+    <meta name="keywords" content="BPM,BPM测量,在线,节拍器,鼓击测速,音乐节奏,每分钟节拍数">
+    <meta name="author" content="BPMrulur">
+    <link rel="canonical" href="https://example.com/bpmrulur">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="js/jquery.3.7.1.min.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>敲击测速器</h1>
+        </header>
+        <main class="main-content">
+            <div id="tap-area" class="tap-area" role="button" aria-label="点击区域，用于测量BPM">
+                <span class="tap-text">点击</span>
+            </div>
+            <nav class="controls">
+                <button id="decrease-btn" class="control-btn" aria-label="减小BPM值">- 微调</button>
+                <button id="increase-btn" class="control-btn" aria-label="增加BPM值">微调 +</button>
+            </nav>
+            <div class="bottom-controls">
+                <div class="mute-control">
+                    <input type="checkbox" id="mute-checkbox" class="mute-checkbox" aria-label="静音开关">
+                    <label for="mute-checkbox" class="mute-label">静音</label>
+                </div>
+                <button id="metronome-btn" class="metronome-btn" aria-label="节拍器开关">节拍器</button>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2023 BPMrulur</p>
+        </footer>
+    </div>
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebApplication",
+            "name": "鼓击测速器",
+            "description": "专业的BPM(每分钟节拍数)测量工具",
+            "applicationCategory": "音乐工具",
+            "operatingSystem": "Web浏览器"
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+body {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    background-color: #1E1E1E;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.container {
+    width: 310px;
+    background-color: #353B3F;
+    border-radius: 0px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.header {
+    background-color: #2A2E31;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #444;
+    background-image: linear-gradient(to bottom, #2F3336, #2A2E31);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: normal;
+    color: #D3DBDB;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.main-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+footer {
+    padding: 8px 0;
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+button {
+    transition: all 0.2s ease;
+}
+
+input {
+    transition: all 0.2s ease;
+}
+
+button:focus,
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}

@@ -1,0 +1,210 @@
+.tap-area {
+    width: 260px;
+    height: 260px;
+    background-color: #515559;
+    border-radius: 0;
+    clip-path: polygon(40px 0, calc(100% - 40px) 0,
+            100% 40px, 100% calc(100% - 40px),
+            calc(100% - 40px) 100%, 40px 100%,
+            0 calc(100% - 40px), 0 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    user-select: none;
+    transition: transform 0.1s, background-color 0.2s;
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(145deg,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.2) 100%);
+}
+
+.tap-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    clip-path: polygon(40px 0, calc(100% - 40px) 0,
+            100% 40px, 100% calc(100% - 40px),
+            calc(100% - 40px) 100%, 40px 100%,
+            0 calc(100% - 40px), 0 40px);
+    box-shadow:
+        inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.tap-area.tapped {
+    background-color: #f5a623;
+    background-image: linear-gradient(145deg,
+            rgba(0, 0, 0, 0.1) 0%,
+            rgba(0, 0, 0, 0.3) 100%);
+}
+
+.tap-area.active {
+    transform: scale(0.98);
+}
+
+.tap-area.stable {
+    background-color: #4D5054;
+}
+
+.tap-area .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(0);
+    animation: ripple-effect 0.6s linear;
+    pointer-events: none;
+}
+
+.tap-text {
+    font-size: 20px;
+    color: #C5D6DD;
+    font-weight: bold;
+}
+
+.tap-area.tapped .tap-text {
+    color: #C64117;
+}
+
+.tap-area.stable .tap-text {
+    color: #C5D6DD;
+}
+
+@keyframes ripple-effect {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.controls {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.control-btn {
+    width: 48%;
+    padding: 8px 0;
+    background-color: #4D5054;
+    border: none;
+    color: #C5D6DD;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.control-btn:hover {
+    background-color: #5a5d61;
+}
+
+.bottom-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.mute-control {
+    display: flex;
+    align-items: center;
+}
+
+.mute-checkbox {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #4D5054;
+    border: 1px solid #555;
+    border-radius: 3px;
+    cursor: pointer;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.mute-checkbox:checked {
+    background-color: #4a90e2;
+}
+
+.mute-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.mute-label {
+    color: #C5D6DD;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.metronome-btn {
+    background-color: #4D5054;
+    border: none;
+    color: #C5D6DD;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.metronome-btn:hover {
+    background-color: #5a5d61;
+}
+
+.metronome-btn.active {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.mode-controls {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.mode-btn {
+    background-color: #4D5054;
+    border: 1px solid #555;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #C5D6DD;
+    font-size: 12px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.mode-btn.active {
+    border-color: #4a90e2;
+    color: #4a90e2;
+}
+
+.mode-btn:hover {
+    background-color: #5a5d61;
+}
