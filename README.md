@@ -15,4 +15,4 @@
 4. 点击"节拍器"按钮开启/关闭节拍器
 
 ## 预览
-[在线体验](https://yourusername.github.io/BPMrulur)
+[在线体验](https://)
