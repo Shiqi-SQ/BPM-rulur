@@ -1,16 +1,21 @@
-$(document).ready(function () {
-    const $tapArea = $('#tap-area');
-    const $tapText = $('.tap-text');
-    let taps = [];
+$(document).ready(function() {
+    let audioContext = null;
+    const audioBuffers = [];
     let bpm = 0;
+    let taps = [];
     let lastTapTime = 0;
+    let tapCount = 0;
     let stableTimeout = null;
     let isMuted = false;
     let isMetronomeActive = false;
     let metronomeInterval = null;
-    let audioContext = null;
-    let audioBuffers = [];
-    let tapCount = 0;
+
+    const $tapArea = $('#tap-area');
+    const $tapText = $('.tap-text');
+    const $decreaseBtn = $('#decrease-btn');
+    const $increaseBtn = $('#increase-btn');
+    const $muteCheckbox = $('#mute-checkbox');
+    const $metronomeBtn = $('#metronome-btn');
 
     function initAudio() {
         if (audioContext) return;
@@ -119,21 +124,14 @@ $(document).ready(function () {
         if (taps.length > 8) {
             taps.shift();
         }
-        $tapArea.addClass('active tapped').removeClass('stable');
+        
+        $tapArea.addClass('active flash').removeClass('stable');
         $tapText.text("点击");
-        const $ripple = $('<span></span>').addClass('ripple');
-        const rect = $tapArea[0].getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        $ripple.css({
-            width: size + 'px',
-            height: size + 'px',
-            left: (rect.width / 2 - size / 2) + 'px',
-            top: (rect.height / 2 - size / 2) + 'px'
-        });
-        $tapArea.append($ripple);
+        
         setTimeout(() => {
-            $ripple.remove();
-        }, 600);
+            $tapArea.removeClass('flash');
+        }, 150);
+        
         setTimeout(() => {
             $tapArea.removeClass('active');
             if (taps.length < 2) {
@@ -143,91 +141,51 @@ $(document).ready(function () {
             }
         }, 100);
     }
-    initAudio();
-    $(document).on('keydown', function (e) {
-        if (e.keyCode === 32 || e.keyCode === 13) {
+
+    $tapArea.on('click', function() {
+        initAudio();
+        simulateTapAreaClick();
+    });
+
+    $decreaseBtn.on('click', function() {
+        if (bpm <= 0) return;
+        bpm = Math.max(30, bpm - 1);
+        updateBPMDisplay();
+        updateMetronome();
+    });
+
+    $increaseBtn.on('click', function() {
+        if (bpm <= 0) bpm = 60;
+        else bpm = Math.min(300, bpm + 1);
+        updateBPMDisplay();
+        updateMetronome();
+    });
+
+    $muteCheckbox.on('change', function() {
+        isMuted = this.checked;
+        console.log('静音状态:', isMuted);
+    });
+
+    $metronomeBtn.on('click', function() {
+        isMetronomeActive = !isMetronomeActive;
+        $(this).toggleClass('active', isMetronomeActive);
+        
+        if (isMetronomeActive) {
+            if (bpm <= 0) bpm = 60;
+            updateMetronome();
+        } else if (metronomeInterval) {
+            clearInterval(metronomeInterval);
+            metronomeInterval = null;
+        }
+    });
+
+    $(window).on('keydown', function(e) {
+        if (e.key === ' ' || e.keyCode === 32) {
             e.preventDefault();
+            initAudio();
             simulateTapAreaClick();
         }
     });
-    $tapArea.on('mousedown', function (e) {
-        const now = Date.now();
-        if (lastTapTime && (now - lastTapTime) > 2000) {
-            taps = [];
-        }
-        taps.push(now);
-        lastTapTime = now;
-        playSequenceSound();
-        if (taps.length > 8) {
-            taps.shift();
-        }
-        $(this).addClass('active tapped').removeClass('stable');
-        $tapText.text("再次点击");
-        setTimeout(() => {
-            $(this).removeClass('active');
-            if (taps.length < 2) {
-                $(this).removeClass('tapped').addClass('stable');
-            } else {
-                calculateBPM();
-            }
-        }, 100);
-        const $ripple = $('<span></span>').addClass('ripple');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        $ripple.css({
-            width: size + 'px',
-            height: size + 'px',
-            left: (e.clientX - rect.left - size / 2) + 'px',
-            top: (e.clientY - rect.top - size / 2) + 'px'
-        });
-        $(this).append($ripple);
-        setTimeout(() => {
-            $ripple.remove();
-        }, 600);
-    });
-    $('#decrease-btn').on('mousedown', function () {
-        if (bpm > 30) {
-            bpm -= 1;
-            $tapText.text(Math.round(bpm));
-            $tapArea.addClass('tapped').removeClass('stable');
-            if (stableTimeout) {
-                clearTimeout(stableTimeout);
-            }
-            stableTimeout = setTimeout(() => {
-                $tapArea.removeClass('tapped').addClass('stable');
-            }, 1500);
-            updateMetronome();
-        }
-    });
-    $('#increase-btn').on('mousedown', function () {
-        if (bpm < 300) {
-            bpm += 1;
-            $tapText.text(Math.round(bpm));
-            $tapArea.addClass('tapped').removeClass('stable');
-            if (stableTimeout) {
-                clearTimeout(stableTimeout);
-            }
-            stableTimeout = setTimeout(() => {
-                $tapArea.removeClass('tapped').addClass('stable');
-            }, 1500);
-            updateMetronome();
-        }
-    });
+
     updateBPMDisplay();
-    $('#mute-checkbox').on('change', function () {
-        isMuted = $(this).prop('checked');
-    });
-    $('#metronome-btn').on('mousedown', function () {
-        isMetronomeActive = !isMetronomeActive;
-        $(this).toggleClass('active', isMetronomeActive);
-        if (isMetronomeActive && bpm > 0) {
-            const interval = 60000 / bpm;
-            metronomeInterval = setInterval(playSequenceSound, interval);
-        } else {
-            if (metronomeInterval) {
-                clearInterval(metronomeInterval);
-                metronomeInterval = null;
-            }
-        }
-    });
 });

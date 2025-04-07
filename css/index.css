@@ -53,17 +53,24 @@
     background-color: #4D5054;
 }
 
-.tap-area .ripple {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(0);
-    animation: ripple-effect 0.6s linear;
-    pointer-events: none;
+.tap-area.flash {
+    animation: flash-effect 0.15s ease-out;
+}
+
+@keyframes flash-effect {
+    0% {
+        background-color: #515559;
+    }
+    50% {
+        background-color: #ffffff;
+    }
+    100% {
+        background-color: #515559;
+    }
 }
 
 .tap-text {
-    font-size: 20px;
+    font-size: 60px;
     color: #C5D6DD;
     font-weight: bold;
 }
@@ -74,13 +81,6 @@
 
 .tap-area.stable .tap-text {
     color: #C5D6DD;
-}
-
-@keyframes ripple-effect {
-    to {
-        transform: scale(2.5);
-        opacity: 0;
-    }
 }
 
 .controls {
@@ -176,35 +176,4 @@
 .metronome-btn.active {
     background-color: #4a90e2;
     color: white;
-}
-
-.mode-controls {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 5px;
-}
-
-.mode-btn {
-    background-color: #4D5054;
-    border: 1px solid #555;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    color: #C5D6DD;
-    font-size: 12px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-}
-
-.mode-btn.active {
-    border-color: #4a90e2;
-    color: #4a90e2;
-}
-
-.mode-btn:hover {
-    background-color: #5a5d61;
 }
