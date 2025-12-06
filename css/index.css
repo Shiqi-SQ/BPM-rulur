@@ -1,179 +1,190 @@
-.tap-area {
-    width: 260px;
-    height: 260px;
-    background-color: #515559;
-    border-radius: 0;
-    clip-path: polygon(40px 0, calc(100% - 40px) 0,
-            100% 40px, 100% calc(100% - 40px),
-            calc(100% - 40px) 100%, 40px 100%,
-            0 calc(100% - 40px), 0 40px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 15px;
-    user-select: none;
-    transition: transform 0.1s, background-color 0.2s;
+.container {
+    width: 310px;
+    height: 500px;
+    background: #31373B;
+    border: 1px solid #242A2E;
     position: relative;
-    overflow: hidden;
-    background-image: linear-gradient(145deg,
-            rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.2) 100%);
+    border-top: none;
+    background-image:
+        linear-gradient(to bottom, #242A2E 1px, transparent 1px),
+        linear-gradient(to right, #3F4549, #40464A, #3F4549);
+    background-size:
+        100% 2px,
+        100% 1px;
+    background-position:
+        top left,
+        0 1px;
+    background-repeat: no-repeat;
+    padding-top: 1px;
 }
 
-.tap-area::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    clip-path: polygon(40px 0, calc(100% - 40px) 0,
-            100% 40px, 100% calc(100% - 40px),
-            calc(100% - 40px) 100%, 40px 100%,
-            0 calc(100% - 40px), 0 40px);
+.header {
+    height: 100px;
+    background: #2C3134;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #242A2E;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    color: #C5D6DD;
+}
+
+.main-content {
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tap-area {
+    width: 220px;
+    height: 220px;
+    background: #3F4549;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 30px;
+    user-select: none;
+    transition: all 0.15s ease;
     box-shadow:
-        inset 2px 2px 5px rgba(0, 0, 0, 0.5),
-        inset -2px -2px 5px rgba(255, 255, 255, 0.05);
-    pointer-events: none;
+        inset 0 2px 4px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.tap-area.tapped {
-    background-color: #f5a623;
-    background-image: linear-gradient(145deg,
-            rgba(0, 0, 0, 0.1) 0%,
-            rgba(0, 0, 0, 0.3) 100%);
+.tap-area:hover {
+    background: #454B4F;
 }
 
-.tap-area.active {
-    transform: scale(0.98);
+.tap-area:active {
+    transform: scale(0.97);
 }
 
-.tap-area.stable {
-    background-color: #4D5054;
+.bpm-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.tap-area.flash {
-    animation: flash-effect 0.15s ease-out;
-}
-
-@keyframes flash-effect {
-    0% {
-        background-color: #515559;
-    }
-    50% {
-        background-color: #ffffff;
-    }
-    100% {
-        background-color: #515559;
-    }
-}
-
-.tap-text {
-    font-size: 60px;
+.bpm-value {
+    font-size: 64px;
+    font-weight: 300;
     color: #C5D6DD;
-    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 8px;
 }
 
-.tap-area.tapped .tap-text {
-    color: #C64117;
-}
-
-.tap-area.stable .tap-text {
-    color: #C5D6DD;
+.bpm-label {
+    font-size: 13px;
+    color: #8A9BA3;
+    letter-spacing: 1px;
 }
 
 .controls {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
 .control-btn {
-    width: 48%;
-    padding: 8px 0;
-    background-color: #4D5054;
+    width: 50px;
+    height: 50px;
+    background: #3F4549;
     border: none;
+    border-radius: 8px;
     color: #C5D6DD;
-    border-radius: 4px;
+    font-size: 24px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .control-btn:hover {
-    background-color: #5a5d61;
+    background: #454B4F;
 }
 
-.bottom-controls {
+.control-btn:active {
+    transform: translateY(1px);
+}
+
+.metronome-btn {
+    width: 80px;
+    height: 50px;
+    background: #3F4549;
+    border: none;
+    border-radius: 8px;
+    color: #C5D6DD;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.metronome-btn:hover {
+    background: #454B4F;
+}
+
+.metronome-btn.active {
+    background: #4A90E2;
+    color: white;
+}
+
+.metronome-btn:active {
+    transform: translateY(1px);
+}
+
+.bottom-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 15px;
 }
 
 .mute-control {
     display: flex;
     align-items: center;
-}
-
-.mute-checkbox {
-    position: relative;
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: #4D5054;
-    border: 1px solid #555;
-    border-radius: 3px;
     cursor: pointer;
-    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+    font-size: 13px;
+    color: #8A9BA3;
 }
 
-.mute-checkbox:checked {
-    background-color: #4a90e2;
-}
-
-.mute-checkbox:checked::after {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 2px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.mute-label {
-    color: #C5D6DD;
-    font-size: 12px;
+.mute-control input {
+    margin-right: 6px;
     cursor: pointer;
 }
 
-.metronome-btn {
-    background-color: #4D5054;
+.reset-btn {
+    padding: 6px 16px;
+    background: #3F4549;
     border: none;
+    border-radius: 6px;
     color: #C5D6DD;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 12px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    transition: all 0.15s ease;
 }
 
-.metronome-btn:hover {
-    background-color: #5a5d61;
+.reset-btn:hover {
+    background: #454B4F;
 }
 
-.metronome-btn.active {
-    background-color: #4a90e2;
-    color: white;
+.reset-btn:active {
+    transform: translateY(1px);
+}
+
+.tap-area.tapped {
+    background: #F5A623;
+    box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(245, 166, 35, 0.3);
+}
+
+.tap-area.tapped .bpm-value {
+    color: #2C3134;
 }
